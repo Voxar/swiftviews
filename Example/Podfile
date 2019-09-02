@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'swiftviews_Example' do
+  pod 'swiftviews', :path => '../'
+
+  target 'swiftviews_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end
