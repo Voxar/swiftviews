@@ -7,18 +7,98 @@
 //
 
 import UIKit
+import swiftviews
 
-class ViewController: UIViewController {
-
+class ViewController: HostViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let body = VStack {[
+            VStackExample(),
+            HStackExample(),
+            ForegroundColorExample(),
+            BackgroundColorExample(),
+            HStackExample()
+                .foreground(color: .orange)
+                .background(color: .gray),
+            ScrollViewExample(),
+        ]}.whenTapped {
+            self.printLabelAt(point: $0.location(in: nil))
+        }
+        
+        self.body = ScrollView(scrollDirection: .vertical) { body }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func printLabelAt(point: CGPoint) {
+        let view = UIApplication.shared
+            .windows.first?
+            .hitTest(point, with: nil)
+            as? UILabel
+        
+        print("Hello", view?.text ?? "unknown")
     }
-
 }
 
+struct ScrollViewExample: View {
+    var body: View {
+        return ScrollView(scrollDirection: .horizontal) {
+            return HStack(spacing: 5) {
+                (0...50).map { i in
+                    Label(text: String(i))
+                        .textAlignment(.center)
+                }
+            }.background(color: .init(white: 0.8, alpha: 1))
+        }
+    }
+}
+
+struct VStackExample: View {
+    var body: View {
+        return VStack {[
+            Label(text: "left")
+                .textAlignment(.left),
+            Label(text: "center")
+                .textAlignment(.center),
+            Label(text: "right")
+                .textAlignment(.right),
+            ]}
+    }
+}
+
+struct HStackExample: View {
+    var body: View {
+        return HStack {[
+            Label(text: "left")
+                .textAlignment(.left),
+            Label(text: "center")
+                .textAlignment(.center),
+            Label(text: "right")
+                .textAlignment(.right),
+            ]}
+    }
+}
+
+struct ForegroundColorExample: View {
+    var body: View {
+        return HStack {[
+            Label(text: "red")
+                .foreground(color: .red),
+            Label(text: "green")
+                .foreground(color: .green),
+            Label(text: "blue")
+                .foreground(color: .blue),
+            ]}
+    }
+}
+
+struct BackgroundColorExample: View {
+    var body: View {
+        return HStack {[
+            Label(text: "red")
+                .background(color: .red),
+            Label(text: "green")
+                .background(color: .green),
+            Label(text: "blue")
+                .background(color: .blue),
+            ]}
+    }
+}
