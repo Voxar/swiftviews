@@ -10,7 +10,12 @@ public struct Text: View {
 
 extension Text: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
-        return UILabel()
+        let view = UILabel()
+        view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        view.setContentCompressionResistancePriority(.required, for: .horizontal)
+        view.setContentCompressionResistancePriority(.required, for: .vertical)
+        return view
     }
     
     public func updateUIView(_ uiView: UIView, context: ViewContext) {

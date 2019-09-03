@@ -10,6 +10,10 @@ open class HostViewController: UIViewController, View {
         }
     }
     
+    public func rebuild() {
+        hostView.rebuild()
+    }
+    
     let hostView = HostView()
         
     open override func loadView() {

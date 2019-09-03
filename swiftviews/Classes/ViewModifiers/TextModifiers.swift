@@ -10,6 +10,12 @@ public extension View {
             (view as? UILabel)?.textColor = color
         }
     }
+    
+    func font(_ font: UIFont) -> View {
+        return GenericViewModifier(body: self) { view in
+            (view as? UILabel)?.font = font
+        }
+    }
 }
 
 

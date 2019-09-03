@@ -15,15 +15,26 @@ class ViewController: HostViewController {
         let body = VStack {[
             VStackExample(),
             HStackExample(),
-            ForegroundColorExample(),
-            BackgroundColorExample(),
+            ForegroundColorExample(align: self.align),
+            BackgroundColorExample(align: self.align),
             HStackExample()
                 .foreground(.orange)
                 .background(.gray),
             ScrollViewExample(),
             ImageExample(),
             SpacerExample(),
+            FontExample(size: 12),
+            FontExample(size: 22),
             Spacer(size: 2).background(.green),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
+            SpacerExample(),
         ]}.whenTapped {
             self.printLabelAt(point: $0.location(in: nil))
         }
@@ -33,13 +44,49 @@ class ViewController: HostViewController {
             .padding(10)
     }
     
+    var align: NSTextAlignment? = nil {
+        didSet { self.body = self.body }
+    }
+    
     func printLabelAt(point: CGPoint) {
         let view = UIApplication.shared
             .windows.first?
             .hitTest(point, with: nil)
             as? UILabel
         
+        
+        switch view?.text ?? "" {
+        case "center": align = .center
+        case "left": align = .left
+        case "right": align = .right
+        default: align = nil
+        }
         print("Hello", view?.text ?? "unknown")
+    }
+}
+
+struct FontExample: View {
+    let size: CGFloat
+    
+    func text(with fontName: String) -> View? {
+        return UIFont(name: fontName, size: size)
+            .flatMap({ Text(fontName).font($0) })?
+            .padding(2)
+    }
+    
+    var firstFontNames: ArraySlice<String> {
+        let names = UIFont.familyNames
+            .compactMap({UIFont.fontNames(forFamilyName: $0).first})
+        return names[0..<min(10, names.count)]
+    }
+    
+    var body: View {
+        return ScrollView(scrollDirection: .horizontal) {
+            HStack {
+                self.firstFontNames.compactMap(self.text)
+            }
+            .padding(10)
+        }
     }
 }
 
@@ -118,8 +165,9 @@ struct HStackExample: View {
 }
 
 struct ForegroundColorExample: View {
+    let align: NSTextAlignment?
     var body: View {
-        return HStack {[
+        let body = HStack {[
             Text("red")
                 .foreground(.red),
             Text("green")
@@ -127,12 +175,15 @@ struct ForegroundColorExample: View {
             Text("blue")
                 .foreground(.blue),
             ]}
+        if let align = align { return body.textAlignment(align) }
+        return body
     }
 }
 
 struct BackgroundColorExample: View {
+    let align: NSTextAlignment?
     var body: View {
-        return HStack {[
+        let body = HStack {[
             Text("red")
                 .background(.red),
             Text("green")
@@ -140,5 +191,7 @@ struct BackgroundColorExample: View {
             Text("blue")
                 .background(.blue),
             ]}
+        if let align = align { return body.textAlignment(align) }
+        return body
     }
 }
