@@ -21,13 +21,14 @@ class ViewStore {
             context.modifiers.append(modifier)
         }
         
-        if let representable = view as? ViewRepresentable {
-            let view = representable.makeUIView(context: context)
-            representable.updateUIView(view, context: context)
-            return view
-        }
-        
-        let uiView = self.viewFor(view: view.body, context: context)
+        let uiView: UIView = {
+            if let representable = view as? ViewRepresentable {
+                let view = representable.makeUIView(context: context)
+                representable.updateUIView(view, context: context)
+                return view
+            }
+            return self.viewFor(view: view.body, context: context)
+        }()
         
         for modifier in context.modifiers {
             modifier.update(uiView: uiView, context: context)

@@ -21,6 +21,8 @@ class ViewController: HostViewController {
                 .foreground(color: .orange)
                 .background(color: .gray),
             ScrollViewExample(),
+            ImageExample(),
+            
         ]}.whenTapped {
             self.printLabelAt(point: $0.location(in: nil))
         }
@@ -35,6 +37,24 @@ class ViewController: HostViewController {
             as? UILabel
         
         print("Hello", view?.text ?? "unknown")
+    }
+}
+
+struct ImageExample: View {
+    var body: View {
+        return HStack {[
+            Image(size: CGSize(width: 50, height: 50), color: .red)
+                .contentHuggingPriority(vertical: .init(rawValue: 0))
+                .contentCompressionResistance(vertical: .defaultLow)
+                .background(color: .yellow)
+            ,
+            Image(named: "x")
+                .contentMode(.center)
+            ,
+            Image(named: "check")
+                .contentMode(.center)
+        ]}
+        .contentMode(.scaleAspectFit)
     }
 }
 

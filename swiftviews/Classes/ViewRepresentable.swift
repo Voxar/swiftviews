@@ -4,3 +4,7 @@ public protocol ViewRepresentable: View {
     
     func updateUIView(_ uiView: UIView, context: ViewContext)
 }
+
+extension ViewRepresentable {
+    public var body: View { return self }
+}
