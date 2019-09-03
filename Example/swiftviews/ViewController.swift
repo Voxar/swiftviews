@@ -30,6 +30,7 @@ class ViewController: HostViewController {
         
         self.body = ScrollView(scrollDirection: .vertical) { body }
             .border(width: 1, color: .lightGray)
+            .padding(10)
     }
     
     func printLabelAt(point: CGPoint) {
