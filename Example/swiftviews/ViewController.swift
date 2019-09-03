@@ -18,16 +18,18 @@ class ViewController: HostViewController {
             ForegroundColorExample(),
             BackgroundColorExample(),
             HStackExample()
-                .foreground(color: .orange)
-                .background(color: .gray),
+                .foreground(.orange)
+                .background(.gray),
             ScrollViewExample(),
             ImageExample(),
             SpacerExample(),
+            Spacer(size: 2).background(.green),
         ]}.whenTapped {
             self.printLabelAt(point: $0.location(in: nil))
         }
         
         self.body = ScrollView(scrollDirection: .vertical) { body }
+            .border(width: 1, color: .lightGray)
     }
     
     func printLabelAt(point: CGPoint) {
@@ -45,12 +47,12 @@ struct SpacerExample: View {
         return HStack {[
             VStack {[
                 Text("v Spacer v").textAlignment(.center),
-                Spacer(size: 10).background(color: .red),
+                Spacer(size: 10).background(.red),
                 Text("^ Spacer ^").textAlignment(.center),
             ]},
             HStack {[
                 Text("Spacer ->").textAlignment(.right),
-                Spacer(size: 10).background(color: .red),
+                Spacer(size: 10).background(.red),
                 Text("<- Spacer").textAlignment(.left),
             ]}
         ]}
@@ -63,7 +65,7 @@ struct ImageExample: View {
             Image(size: CGSize(width: 50, height: 50), color: .red)
                 .contentHuggingPriority(vertical: .init(rawValue: 0))
                 .contentCompressionResistance(vertical: .defaultLow)
-                .background(color: .yellow)
+                .background(.yellow)
             ,
             Image(named: "x")
                 .contentMode(.center)
@@ -83,7 +85,7 @@ struct ScrollViewExample: View {
                     Text(String(i))
                         .textAlignment(.center)
                 }
-            }.background(color: .init(white: 0.8, alpha: 1))
+            }.background(.init(white: 0.8, alpha: 1))
         }
     }
 }
@@ -118,11 +120,11 @@ struct ForegroundColorExample: View {
     var body: View {
         return HStack {[
             Text("red")
-                .foreground(color: .red),
+                .foreground(.red),
             Text("green")
-                .foreground(color: .green),
+                .foreground(.green),
             Text("blue")
-                .foreground(color: .blue),
+                .foreground(.blue),
             ]}
     }
 }
@@ -131,11 +133,11 @@ struct BackgroundColorExample: View {
     var body: View {
         return HStack {[
             Text("red")
-                .background(color: .red),
+                .background(.red),
             Text("green")
-                .background(color: .green),
+                .background(.green),
             Text("blue")
-                .background(color: .blue),
+                .background(.blue),
             ]}
     }
 }

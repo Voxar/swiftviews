@@ -3,9 +3,7 @@ public struct ViewContext {
     internal var modifiers: [ViewModifier] = []
     internal var stack: [View] = []
     
-    func parent<T: View>(is type: T.Type) -> Bool {
-        return stack.last is T
-    }
+    var parent: View? { return stack.last }
 }
 
 class UIViewBuilder {

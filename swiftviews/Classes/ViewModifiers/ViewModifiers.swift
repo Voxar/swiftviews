@@ -37,6 +37,13 @@ public extension View {
         }
     }
     
+    func border(width: CGFloat = 1, color: UIColor = .black) -> View {
+        return modifier { view in
+            view.layer.borderWidth = width
+            view.layer.borderColor = color.cgColor
+        }
+    }
+    
     func modifier(_ block: @escaping (UIView) -> ()) -> View {
         return GenericViewModifier(body: self, block: block)
     }

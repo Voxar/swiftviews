@@ -5,7 +5,7 @@ public extension View {
         }
     }
     
-    func foreground(color: UIColor) -> View {
+    func foreground(_ color: UIColor) -> View {
         return GenericViewModifier(body: self) { view in
             (view as? UILabel)?.textColor = color
         }

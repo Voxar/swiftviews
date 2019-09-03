@@ -13,11 +13,12 @@ extension Spacer: UIViewRepresentable {
         let view = UIView()
         
         
-        if context.parent(is: HStack.self) {
-            view.widthAnchor.constraint(equalToConstant: size).isActive = true
-        }
-        if context.parent(is: VStack.self) {
-            view.heightAnchor.constraint(equalToConstant: size).isActive = true
+        if let stack = context.parent as? StackView {
+            if stack.axis == .horizontal {
+                view.widthAnchor.constraint(equalToConstant: size).isActive = true
+            } else {
+                view.heightAnchor.constraint(equalToConstant: size).isActive = true
+            }
         }
         
         return view

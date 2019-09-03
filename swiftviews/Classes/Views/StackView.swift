@@ -72,6 +72,8 @@ extension StackView: UIViewRepresentable {
             view.removeArrangedSubview(subview)
         }
         let views = content()
+        var context = context
+        context.stack.append(self)
         for subview in views.map({ viewBuilder.viewFor(view: $0, context: context) }) {
             view.addArrangedSubview(subview)
         }

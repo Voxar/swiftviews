@@ -28,6 +28,9 @@ extension ScrollView: UIViewRepresentable {
         }
         
         let body = self.body
+        
+        var context = context
+        context.stack.append(self)
         let subview = viewBuilder.viewFor(view: body, context: context)
         
         view.addSubview(subview)
