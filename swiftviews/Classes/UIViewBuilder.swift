@@ -1,10 +1,15 @@
 
 public struct ViewContext {
     internal var modifiers: [ViewModifier] = []
+    internal var stack: [View] = []
+    
+    func parent<T: View>(is type: T.Type) -> Bool {
+        return stack.last is T
+    }
 }
 
-class ViewStore {
-    func viewFor(representable: ViewRepresentable, context: ViewContext) -> UIView {
+class UIViewBuilder {
+    func viewFor(representable: UIViewRepresentable, context: ViewContext) -> UIView {
         let view = representable.makeUIView(context: context)
         representable.updateUIView(view, context: context)
         return view
@@ -22,10 +27,14 @@ class ViewStore {
         }
         
         let uiView: UIView = {
-            if let representable = view as? ViewRepresentable {
+            if let representable = view as? UIViewRepresentable {
                 let view = representable.makeUIView(context: context)
                 representable.updateUIView(view, context: context)
                 return view
+            }
+            
+            if !(view is ViewModifier) {
+                context.stack.append(view)
             }
             return self.viewFor(view: view.body, context: context)
         }()

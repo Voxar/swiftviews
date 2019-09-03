@@ -22,7 +22,7 @@ class ViewController: HostViewController {
                 .background(color: .gray),
             ScrollViewExample(),
             ImageExample(),
-            
+            SpacerExample(),
         ]}.whenTapped {
             self.printLabelAt(point: $0.location(in: nil))
         }
@@ -37,6 +37,23 @@ class ViewController: HostViewController {
             as? UILabel
         
         print("Hello", view?.text ?? "unknown")
+    }
+}
+
+struct SpacerExample: View {
+    var body: View {
+        return HStack {[
+            VStack {[
+                Label(text: "v Spacer v").textAlignment(.center),
+                Spacer(size: 10).background(color: .red),
+                Label(text: "^ Spacer ^").textAlignment(.center),
+            ]},
+            HStack {[
+                Label(text: "Spacer ->").textAlignment(.right),
+                Spacer(size: 10).background(color: .red),
+                Label(text: "<- Spacer").textAlignment(.left),
+            ]}
+        ]}
     }
 }
 

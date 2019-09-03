@@ -8,7 +8,7 @@ public struct Label: View {
     }
 }
 
-extension Label: ViewRepresentable {
+extension Label: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
         return UILabel()
     }

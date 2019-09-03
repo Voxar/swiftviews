@@ -19,7 +19,7 @@ public struct Image {
     }
 }
 
-extension Image: ViewRepresentable {
+extension Image: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
         return UIImageView()
     }

@@ -12,10 +12,10 @@ public struct ScrollView: View {
         self.scrollDirection = scrollDirection
     }
     
-    private let viewStore = ViewStore()
+    private let viewBuilder = UIViewBuilder()
 }
 
-extension ScrollView: ViewRepresentable {
+extension ScrollView: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
         return UIScrollView()
     }
@@ -28,7 +28,7 @@ extension ScrollView: ViewRepresentable {
         }
         
         let body = self.body
-        let subview = viewStore.viewFor(view: body, context: context)
+        let subview = viewBuilder.viewFor(view: body, context: context)
         
         view.addSubview(subview)
         view.preservesSuperviewLayoutMargins = true

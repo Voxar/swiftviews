@@ -5,5 +5,4 @@ public extension View {
             view.backgroundColor = color
         }
     }
-    
 }

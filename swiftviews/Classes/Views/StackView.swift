@@ -52,10 +52,10 @@ struct StackView: View {
         self.content = content
     }
     
-    private let viewStore = ViewStore()
+    private let viewBuilder = UIViewBuilder()
 }
 
-extension StackView: ViewRepresentable {
+extension StackView: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
         let view = UIStackView()
         view.preservesSuperviewLayoutMargins = true
@@ -72,7 +72,7 @@ extension StackView: ViewRepresentable {
             view.removeArrangedSubview(subview)
         }
         let views = content()
-        for subview in views.map({ viewStore.viewFor(view: $0, context: context) }) {
+        for subview in views.map({ viewBuilder.viewFor(view: $0, context: context) }) {
             view.addArrangedSubview(subview)
         }
     }

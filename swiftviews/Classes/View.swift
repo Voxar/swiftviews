@@ -9,6 +9,3 @@ public protocol View {
 public struct Empty: View {
     public var body: View { return self }
 }
-
-
-

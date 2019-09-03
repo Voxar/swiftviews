@@ -3,7 +3,7 @@ public class HostView: UIView {
         didSet { rebuild() }
     }
     
-    let viewStore = ViewStore()
+    let viewBuilder = UIViewBuilder()
     
     func rebuild() {
         let body = self.body
@@ -16,7 +16,7 @@ public class HostView: UIView {
             view.removeFromSuperview()
         }
         
-        let subview: UIView = viewStore.viewFor(view: body, context: ViewContext())
+        let subview: UIView = viewBuilder.viewFor(view: body, context: ViewContext())
         
         addSubview(subview)
         

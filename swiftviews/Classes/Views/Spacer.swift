@@ -1,15 +1,30 @@
-struct Spacer: View {
-    var size: CGFloat
+public struct Spacer: View {
+    public var size: CGFloat
     
-    var body: View { return self }
+    public var body: View { return self }
+    
+    public init(size: CGFloat) {
+        self.size = size
+    }
 }
 
-extension Spacer: ViewRepresentable {
-    func makeUIView(context: ViewContext) -> UIView {
-        return UIView()
+extension Spacer: UIViewRepresentable {
+    public func makeUIView(context: ViewContext) -> UIView {
+        let view = UIView()
+        
+        
+        if context.parent(is: HStack.self) {
+            view.widthAnchor.constraint(equalToConstant: size).isActive = true
+        }
+        if context.parent(is: VStack.self) {
+            view.heightAnchor.constraint(equalToConstant: size).isActive = true
+        }
+        
+        return view
     }
     
-    func updateUIView(_ uiView: UIView, context: ViewContext) {
+    public func updateUIView(_ uiView: UIView, context: ViewContext) {
         uiView.backgroundColor = .clear
+        
     }
 }
