@@ -44,14 +44,14 @@ struct SpacerExample: View {
     var body: View {
         return HStack {[
             VStack {[
-                Label(text: "v Spacer v").textAlignment(.center),
+                Text("v Spacer v").textAlignment(.center),
                 Spacer(size: 10).background(color: .red),
-                Label(text: "^ Spacer ^").textAlignment(.center),
+                Text("^ Spacer ^").textAlignment(.center),
             ]},
             HStack {[
-                Label(text: "Spacer ->").textAlignment(.right),
+                Text("Spacer ->").textAlignment(.right),
                 Spacer(size: 10).background(color: .red),
-                Label(text: "<- Spacer").textAlignment(.left),
+                Text("<- Spacer").textAlignment(.left),
             ]}
         ]}
     }
@@ -80,7 +80,7 @@ struct ScrollViewExample: View {
         return ScrollView(scrollDirection: .horizontal) {
             return HStack(spacing: 5) {
                 (0...50).map { i in
-                    Label(text: String(i))
+                    Text(String(i))
                         .textAlignment(.center)
                 }
             }.background(color: .init(white: 0.8, alpha: 1))
@@ -91,11 +91,11 @@ struct ScrollViewExample: View {
 struct VStackExample: View {
     var body: View {
         return VStack {[
-            Label(text: "left")
+            Text("left")
                 .textAlignment(.left),
-            Label(text: "center")
+            Text("center")
                 .textAlignment(.center),
-            Label(text: "right")
+            Text("right")
                 .textAlignment(.right),
             ]}
     }
@@ -104,11 +104,11 @@ struct VStackExample: View {
 struct HStackExample: View {
     var body: View {
         return HStack {[
-            Label(text: "left")
+            Text("left")
                 .textAlignment(.left),
-            Label(text: "center")
+            Text("center")
                 .textAlignment(.center),
-            Label(text: "right")
+            Text("right")
                 .textAlignment(.right),
             ]}
     }
@@ -117,11 +117,11 @@ struct HStackExample: View {
 struct ForegroundColorExample: View {
     var body: View {
         return HStack {[
-            Label(text: "red")
+            Text("red")
                 .foreground(color: .red),
-            Label(text: "green")
+            Text("green")
                 .foreground(color: .green),
-            Label(text: "blue")
+            Text("blue")
                 .foreground(color: .blue),
             ]}
     }
@@ -130,11 +130,11 @@ struct ForegroundColorExample: View {
 struct BackgroundColorExample: View {
     var body: View {
         return HStack {[
-            Label(text: "red")
+            Text("red")
                 .background(color: .red),
-            Label(text: "green")
+            Text("green")
                 .background(color: .green),
-            Label(text: "blue")
+            Text("blue")
                 .background(color: .blue),
             ]}
     }

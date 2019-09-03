@@ -1,14 +1,14 @@
-public struct Label: View {
+public struct Text: View {
     public let text: String
     
     public var body: View { return self }
     
-    public init(text: String) {
+    public init(_ text: String) {
         self.text = text
     }
 }
 
-extension Label: UIViewRepresentable {
+extension Text: UIViewRepresentable {
     public func makeUIView(context: ViewContext) -> UIView {
         return UILabel()
     }
@@ -17,3 +17,4 @@ extension Label: UIViewRepresentable {
         (uiView as! UILabel).text = text
     }
 }
+

@@ -2,7 +2,7 @@
 import UIKit
 
 open class HostViewController: UIViewController, View {
-    open var body: View = Label(text: "HostViewController") {
+    open var body: View = Text("HostViewController") {
         didSet {
             if isViewLoaded {
                 hostView.body = body
